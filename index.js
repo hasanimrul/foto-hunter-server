@@ -43,8 +43,8 @@ async function run() {
 
         // reviews api
 
+
         app.get('/reviews', async (req, res) => {
-            console.log(req.query);
             let query = {};
             if (req.query.email) {
                 query = {
@@ -55,6 +55,14 @@ async function run() {
             const reviews = await cursor.toArray();
             res.send(reviews);
         })
+        app.get('/reviews/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { service: id };
+            const cursor = reviewCollection.find(query);
+            const reviews = await cursor.toArray();
+            res.send(reviews);
+        });
+
         app.post('/reviews', async (req, res) => {
             const review = req.body;
             const result = await reviewCollection.insertOne(review);
