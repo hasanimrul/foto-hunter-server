@@ -39,7 +39,7 @@ async function run() {
 
         app.post('/jwt', (req, res) => {
             const user = req.body;
-            const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' })
+            const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '24h' })
             res.send({ token })
         })
 
@@ -75,12 +75,12 @@ async function run() {
 
         // reviews api
 
-        // app.get('/reviews/:id', async (req, res) => {
-        //     const id = req.params.id;
-        //     const query = { _id: ObjectId(id) };
-        //     const review = await reviewCollection.findOne(query);
-        //     res.send(review);
-        // });
+        app.get('/reviews/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const review = await reviewCollection.findOne(query);
+            res.send(review);
+        });
 
         app.put('/reviews/:id', async (req, res) => {
             const id = req.params.id;
@@ -113,13 +113,13 @@ async function run() {
             res.send(reviews);
         });
 
-        // app.get('/reviews/:serviceId', async (req, res) => {
-        //     const serviceId = req.params.serviceId;
-        //     const query = { service: serviceId };
-        //     const cursor = reviewCollection.find(query);
-        //     const reviews = await cursor.toArray();
-        //     res.send(reviews);
-        // });
+        app.get('/reviews/:serviceId', async (req, res) => {
+            const serviceId = req.params.serviceId;
+            const query = { service: serviceId };
+            const cursor = reviewCollection.find(query);
+            const reviews = await cursor.toArray();
+            res.send(reviews);
+        });
 
 
 
