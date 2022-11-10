@@ -75,12 +75,12 @@ async function run() {
 
         // reviews api
 
-        app.get('/reviews/:id', async (req, res) => {
-            const id = req.params.id;
-            const query = { _id: ObjectId(id) };
-            const review = await reviewCollection.findOne(query);
-            res.send(review);
-        });
+        // app.get('/reviews/:id', async (req, res) => {
+        //     const id = req.params.id;
+        //     const query = { _id: ObjectId(id) };
+        //     const review = await reviewCollection.findOne(query);
+        //     res.send(review);
+        // });
 
         app.put('/reviews/:id', async (req, res) => {
             const id = req.params.id;
@@ -95,6 +95,7 @@ async function run() {
             const result = await reviewCollection.updateOne(filter, updatedReview, option);
             res.send(result);
         })
+
         app.get('/reviews', verifyJWT, async (req, res) => {
             const decoded = req.decoded;
             if (decoded.email !== req.query.email) {
@@ -112,13 +113,15 @@ async function run() {
             res.send(reviews);
         });
 
-        app.get('/reviews/:serviceId', async (req, res) => {
-            const serviceId = req.params.serviceId;
-            const query = { service: serviceId };
-            const cursor = reviewCollection.find(query);
-            const reviews = await cursor.toArray();
-            res.send(reviews);
-        });
+        // app.get('/reviews/:serviceId', async (req, res) => {
+        //     const serviceId = req.params.serviceId;
+        //     const query = { service: serviceId };
+        //     const cursor = reviewCollection.find(query);
+        //     const reviews = await cursor.toArray();
+        //     res.send(reviews);
+        // });
+
+
 
         app.post('/reviews', async (req, res) => {
             const review = req.body;
