@@ -65,6 +65,8 @@ async function run() {
             res.send(service)
         });
 
+
+
         app.post('/services', async (req, res) => {
             const service = req.body;
             const result = await serviceCollection.insertOne(service);
@@ -108,7 +110,8 @@ async function run() {
             const cursor = reviewCollection.find(query);
             const reviews = await cursor.toArray();
             res.send(reviews);
-        })
+        });
+
         app.get('/reviews/:serviceId', async (req, res) => {
             const serviceId = req.params.serviceId;
             const query = { service: serviceId };
@@ -128,7 +131,7 @@ async function run() {
             const query = { _id: ObjectId(id) };
             const result = await reviewCollection.deleteOne(query);
             res.send(result);
-        })
+        });
     }
     finally {
 
