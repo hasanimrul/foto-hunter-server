@@ -113,7 +113,7 @@ async function run() {
             res.send(reviews);
         });
 
-        app.get('/reviews/:serviceId', async (req, res) => {
+        app.get('/serviceReviews/:serviceId', async (req, res) => {
             const serviceId = req.params.serviceId;
             const query = { service: serviceId };
             const cursor = reviewCollection.find(query);
